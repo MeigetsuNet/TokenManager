@@ -132,15 +132,10 @@ migrations/
 system/**/*.dat
 
 # Unused files
-Docker/
 coverage/
 src/
-tests/
+test/
 .*rc.*
 .*ignore
-docker-compose.yaml
-prisma/migrations/
-ForTest/
-*.ts
 tsconfig*json
 *.js.map
