@@ -94,10 +94,8 @@ describe('TokenManager', () => {
                     }
                 }
                 const TokenMgr = new TokenManager(new IO(), 'plain');
-                const TokenInfo = await TokenMgr.create(ID, ['user.read', 'user.write'], ExpireDate);
-                expect(TokenInfo.token).toMatch(/^[0-9A-Za-z]{32}$/);
-                expect(TokenInfo.expires_at.getTime()).toBe(ExpireDate.getTime());
-                expect(Object.keys(TokenInfo)).toMatchObject(['token', 'expires_at']);
+                const TokenText = await TokenMgr.create(ID, ['user.read', 'user.write'], ExpireDate);
+                expect(TokenText).toMatch(/^[0-9A-Za-z]{32}$/);
             });
             it('get/ok', async () => {
                 const ID = uuuidv4();
@@ -220,10 +218,8 @@ describe('TokenManager', () => {
                     }
                 }
                 const TokenMgr = new TokenManager(new IO(), HashedMethod);
-                const TokenInfo = await TokenMgr.create(ID, ['user.read', 'user.write'], ExpireDate);
-                expect(TokenInfo.token).toMatch(/^[0-9A-Za-z]{32}$/);
-                expect(TokenInfo.expires_at.getTime()).toBe(ExpireDate.getTime());
-                expect(Object.keys(TokenInfo)).toMatchObject(['token', 'expires_at']);
+                const TokenText = await TokenMgr.create(ID, ['user.read', 'user.write'], ExpireDate);
+                expect(TokenText).toMatch(/^[0-9A-Za-z]{32}$/);
             });
             it('get/ok', async () => {
                 const ID = uuuidv4();
@@ -389,10 +385,8 @@ describe('TokenManager', () => {
                     }
                 }
                 const TokenMgr = new TokenManager(new IO(), 'plain', Params);
-                const TokenInfo = await TokenMgr.create(ID, ['user.read', 'user.write'], ExpireDate);
-                expect(TokenInfo.token).toMatch(/^[0-9A-Za-z]{32}$/);
-                expect(TokenInfo.expires_at.getTime()).toBe(ExpireDate.getTime());
-                expect(Object.keys(TokenInfo)).toMatchObject(['token', 'expires_at']);
+                const TokenText = await TokenMgr.create(ID, ['user.read', 'user.write'], ExpireDate);
+                expect(TokenText).toMatch(/^[0-9A-Za-z]{32}$/);
             });
             it('get/ok', async () => {
                 const ID = uuuidv4();
@@ -515,9 +509,7 @@ describe('TokenManager', () => {
                 }
                 const TokenMgr = new TokenManager(new IO(), HashedMethod, Params);
                 const TokenInfo = await TokenMgr.create(ID, ['user.read', 'user.write'], ExpireDate);
-                expect(TokenInfo.token).toMatch(/^[0-9A-Za-z]{32}$/);
-                expect(TokenInfo.expires_at.getTime()).toBe(ExpireDate.getTime());
-                expect(Object.keys(TokenInfo)).toMatchObject(['token', 'expires_at']);
+                expect(TokenInfo).toMatch(/^[0-9A-Za-z]{32}$/);
             });
             it('get/ok', async () => {
                 const ID = uuuidv4();

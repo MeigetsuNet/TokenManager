@@ -47,7 +47,7 @@ export default class TokenManager {
         id: string,
         scopes: string[],
         ExpireDate: Date
-    ): Promise<{ token: string; expires_at: Date }> {
+    ): Promise<string> {
         const TokenText = await this.CreateTokenText();
         await this.IO.write({
             token: this.Method(this.TokenConfig.salt == null ? TokenText : `${this.TokenConfig.salt}${TokenText}`),
@@ -55,10 +55,7 @@ export default class TokenManager {
             linked_id: id,
             scopes: scopes.join(','),
         });
-        return {
-            token: TokenText,
-            expires_at: ExpireDate,
-        };
+        return TokenText;
     }
     public async get(token: string): Promise<TokenInformation<string[]> | null> {
         const tokenData = await this.IO.read(
