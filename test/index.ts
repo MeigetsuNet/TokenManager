@@ -55,7 +55,7 @@ describe('TokenManager', () => {
                     const Ret =
                         this.callCount++ === 0
                             ? {
-                                  expires_date: new Date(Date.now() + 3600 * 1000),
+                                  expires_at: new Date(Date.now() + 3600 * 1000),
                                   linked_id: 'test',
                                   scopes: 'user.read,user.write',
                               }
@@ -81,7 +81,7 @@ describe('TokenManager', () => {
                             token: data.token, // mockしてないので、こうしないとテストが通らない
                             linked_id: ID,
                             scopes: 'user.read,user.write',
-                            expires_date: ExpireDate,
+                            expires_at: ExpireDate,
                         };
                         expect(data).toStrictEqual(Expect);
                         return Promise.resolve();
@@ -105,7 +105,7 @@ describe('TokenManager', () => {
                     cache = [
                         {
                             token: SupportedHashMethods.sha256(TokenText),
-                            expires_date: ExpireDate,
+                            expires_at: ExpireDate,
                             linked_id: ID,
                             scopes: 'user.read,user.write',
                         },
@@ -123,7 +123,7 @@ describe('TokenManager', () => {
                 const TokenMgr = new TokenManager(new IO(), 'sha256');
                 const TokenInfo = await TokenMgr.get(TokenText);
                 const Expect = {
-                    expires_date: ExpireDate,
+                    expires_at: ExpireDate,
                     linked_id: ID,
                     scopes: ['user.read', 'user.write'],
                 };
@@ -137,7 +137,7 @@ describe('TokenManager', () => {
                     cache = [
                         {
                             token: SupportedHashMethods.sha256(TokenText),
-                            expires_date: ExpireDate,
+                            expires_at: ExpireDate,
                             linked_id: ID,
                             scopes: 'user.read,user.write',
                         },
@@ -164,7 +164,7 @@ describe('TokenManager', () => {
                     cache = [
                         {
                             token: SupportedHashMethods.md5(TokenText),
-                            expires_date: ExpireDate,
+                            expires_at: ExpireDate,
                             linked_id: ID,
                             scopes: 'user.read,user.write',
                         },
@@ -183,7 +183,7 @@ describe('TokenManager', () => {
                 const TokenMgr = new TokenManager(new IO(), 'md5');
                 const BeforeRevoke = await TokenMgr.get(TokenText);
                 expect(BeforeRevoke).toStrictEqual({
-                    expires_date: ExpireDate,
+                    expires_at: ExpireDate,
                     linked_id: ID,
                     scopes: ['user.read', 'user.write'],
                 });
@@ -205,7 +205,7 @@ describe('TokenManager', () => {
                             token: data.token, // mockしてないので、こうしないとテストが通らない
                             linked_id: ID,
                             scopes: 'user.read,user.write',
-                            expires_date: ExpireDate,
+                            expires_at: ExpireDate,
                         };
                         expect(data).toStrictEqual(Expect);
                         return Promise.resolve();
@@ -229,7 +229,7 @@ describe('TokenManager', () => {
                     cache = [
                         {
                             token: HashedMethod(TokenText),
-                            expires_date: ExpireDate,
+                            expires_at: ExpireDate,
                             linked_id: ID,
                             scopes: 'user.read,user.write',
                         },
@@ -247,7 +247,7 @@ describe('TokenManager', () => {
                 const TokenMgr = new TokenManager(new IO(), HashedMethod);
                 const TokenInfo = await TokenMgr.get(TokenText);
                 const Expect = {
-                    expires_date: ExpireDate,
+                    expires_at: ExpireDate,
                     linked_id: ID,
                     scopes: ['user.read', 'user.write'],
                 };
@@ -261,7 +261,7 @@ describe('TokenManager', () => {
                     cache = [
                         {
                             token: HashedMethod(TokenText),
-                            expires_date: ExpireDate,
+                            expires_at: ExpireDate,
                             linked_id: ID,
                             scopes: 'user.read,user.write',
                         },
@@ -288,7 +288,7 @@ describe('TokenManager', () => {
                     cache = [
                         {
                             token: HashedMethod(TokenText),
-                            expires_date: ExpireDate,
+                            expires_at: ExpireDate,
                             linked_id: ID,
                             scopes: 'user.read,user.write',
                         },
@@ -307,7 +307,7 @@ describe('TokenManager', () => {
                 const TokenMgr = new TokenManager(new IO(), HashedMethod);
                 const BeforeRevoke = await TokenMgr.get(TokenText);
                 expect(BeforeRevoke).toStrictEqual({
-                    expires_date: ExpireDate,
+                    expires_at: ExpireDate,
                     linked_id: ID,
                     scopes: ['user.read', 'user.write'],
                 });
@@ -346,7 +346,7 @@ describe('TokenManager', () => {
                     const Ret =
                         this.callCount++ === 0
                             ? {
-                                  expires_date: new Date(Date.now() + 3600 * 1000),
+                                  expires_at: new Date(Date.now() + 3600 * 1000),
                                   linked_id: 'test',
                                   scopes: 'user.read,user.write',
                               }
@@ -372,7 +372,7 @@ describe('TokenManager', () => {
                             token: data.token, // mockしてないので、こうしないとテストが通らない
                             linked_id: ID,
                             scopes: 'user.read,user.write',
-                            expires_date: ExpireDate,
+                            expires_at: ExpireDate,
                         };
                         expect(data).toStrictEqual(Expect);
                         return Promise.resolve();
@@ -396,7 +396,7 @@ describe('TokenManager', () => {
                     cache = [
                         {
                             token: SupportedHashMethods.sha256(Params.salt + TokenText),
-                            expires_date: ExpireDate,
+                            expires_at: ExpireDate,
                             linked_id: ID,
                             scopes: 'user.read,user.write',
                         },
@@ -414,7 +414,7 @@ describe('TokenManager', () => {
                 const TokenMgr = new TokenManager(new IO(), 'sha256', Params);
                 const TokenInfo = await TokenMgr.get(TokenText);
                 const Expect = {
-                    expires_date: ExpireDate,
+                    expires_at: ExpireDate,
                     linked_id: ID,
                     scopes: ['user.read', 'user.write'],
                 };
@@ -428,7 +428,7 @@ describe('TokenManager', () => {
                     cache = [
                         {
                             token: SupportedHashMethods.sha256(Params.salt + TokenText),
-                            expires_date: ExpireDate,
+                            expires_at: ExpireDate,
                             linked_id: ID,
                             scopes: 'user.read,user.write',
                         },
@@ -455,7 +455,7 @@ describe('TokenManager', () => {
                     cache = [
                         {
                             token: SupportedHashMethods.md5(Params.salt + TokenText),
-                            expires_date: ExpireDate,
+                            expires_at: ExpireDate,
                             linked_id: ID,
                             scopes: 'user.read,user.write',
                         },
@@ -474,7 +474,7 @@ describe('TokenManager', () => {
                 const TokenMgr = new TokenManager(new IO(), 'md5', Params);
                 const BeforeRevoke = await TokenMgr.get(TokenText);
                 expect(BeforeRevoke).toStrictEqual({
-                    expires_date: ExpireDate,
+                    expires_at: ExpireDate,
                     linked_id: ID,
                     scopes: ['user.read', 'user.write'],
                 });
@@ -495,7 +495,7 @@ describe('TokenManager', () => {
                             token: data.token, // mockしてないので、こうしないとテストが通らない
                             linked_id: ID,
                             scopes: 'user.read,user.write',
-                            expires_date: ExpireDate,
+                            expires_at: ExpireDate,
                         };
                         expect(data).toStrictEqual(Expect);
                         return Promise.resolve();
@@ -519,7 +519,7 @@ describe('TokenManager', () => {
                     cache = [
                         {
                             token: HashedMethod(Params.salt + TokenText),
-                            expires_date: ExpireDate,
+                            expires_at: ExpireDate,
                             linked_id: ID,
                             scopes: 'user.read,user.write',
                         },
@@ -537,7 +537,7 @@ describe('TokenManager', () => {
                 const TokenMgr = new TokenManager(new IO(), HashedMethod, Params);
                 const TokenInfo = await TokenMgr.get(TokenText);
                 const Expect = {
-                    expires_date: ExpireDate,
+                    expires_at: ExpireDate,
                     linked_id: ID,
                     scopes: ['user.read', 'user.write'],
                 };
@@ -551,7 +551,7 @@ describe('TokenManager', () => {
                     cache = [
                         {
                             token: HashedMethod(Params.salt + TokenText),
-                            expires_date: ExpireDate,
+                            expires_at: ExpireDate,
                             linked_id: ID,
                             scopes: 'user.read,user.write',
                         },
@@ -578,7 +578,7 @@ describe('TokenManager', () => {
                     cache = [
                         {
                             token: HashedMethod(Params.salt + TokenText),
-                            expires_date: ExpireDate,
+                            expires_at: ExpireDate,
                             linked_id: ID,
                             scopes: 'user.read,user.write',
                         },
@@ -597,7 +597,7 @@ describe('TokenManager', () => {
                 const TokenMgr = new TokenManager(new IO(), HashedMethod, Params);
                 const BeforeRevoke = await TokenMgr.get(TokenText);
                 expect(BeforeRevoke).toStrictEqual({
-                    expires_date: ExpireDate,
+                    expires_at: ExpireDate,
                     linked_id: ID,
                     scopes: ['user.read', 'user.write'],
                 });

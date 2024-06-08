@@ -10,7 +10,7 @@ export const SupportedHashMethods = {
 };
 
 export type TokenInformation<ScopeDataType> = {
-    expires_date: Date;
+    expires_at: Date;
     linked_id: string;
     scopes: ScopeDataType;
 };
@@ -51,7 +51,7 @@ export default class TokenManager {
         const TokenText = await this.CreateTokenText();
         await this.IO.write({
             token: this.Method(this.TokenConfig.salt == null ? TokenText : `${this.TokenConfig.salt}${TokenText}`),
-            expires_date: ExpireDate,
+            expires_at: ExpireDate,
             linked_id: id,
             scopes: scopes.join(','),
         });
@@ -63,13 +63,13 @@ export default class TokenManager {
         ).then(data => {
             if (data == null) return null;
             return {
-                expires_date: data.expires_date,
+                expires_at: data.expires_at,
                 linked_id: data.linked_id,
                 scopes: data.scopes.split(','),
             };
         });
         if (tokenData == null) return null;
-        if (tokenData.expires_date.getTime() < Date.now()) {
+        if (tokenData.expires_at.getTime() < Date.now()) {
             await this.revoke(token);
             return null;
         }
