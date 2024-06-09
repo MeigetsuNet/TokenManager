@@ -19,10 +19,10 @@ export type TokenGenInformation<ScopeDataType> = TokenInformation<ScopeDataType>
     token: string;
 };
 
-export abstract class IOManagerBase {
-    abstract write(data: TokenGenInformation<string>): Promise<void>;
-    abstract read(token: string): Promise<TokenInformation<string> | null>;
-    abstract remove(token: string): Promise<void>;
+export interface IOManagerBase {
+    write(data: TokenGenInformation<string>): Promise<void>;
+    read(token: string): Promise<TokenInformation<string> | null>;
+    remove(token: string): Promise<void>;
 }
 
 export default class TokenManager {

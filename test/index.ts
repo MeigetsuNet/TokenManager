@@ -32,7 +32,7 @@ describe('SupportedHashMethods', () => {
 describe('TokenManager', () => {
     describe('No Salt', () => {
         it('init/no hashed method', () => {
-            class IO extends IOManagerBase {
+            class IO implements IOManagerBase {
                 write(data: TokenGenInformation<string>): Promise<void> {
                     return Promise.resolve();
                 }
@@ -74,7 +74,7 @@ describe('TokenManager', () => {
             it('create', async () => {
                 const ID = uuuidv4();
                 const ExpireDate = new Date(Date.now() + 3600 * 1000);
-                class IO extends IOManagerBase {
+                class IO implements IOManagerBase {
                     write(data: TokenGenInformation<string>): Promise<void> {
                         expect(data.token).toMatch(/^[0-9A-Za-z]{32}$/);
                         const Expect = {
@@ -101,7 +101,7 @@ describe('TokenManager', () => {
                 const ID = uuuidv4();
                 const ExpireDate = new Date(Date.now() + 3600 * 1000);
                 const TokenText = generate({ length: 32, charset: 'alphanumeric' });
-                class IO extends IOManagerBase {
+                class IO implements IOManagerBase {
                     cache = [
                         {
                             token: SupportedHashMethods.sha256(TokenText),
@@ -133,7 +133,7 @@ describe('TokenManager', () => {
                 const ID = uuuidv4();
                 const ExpireDate = new Date(Date.now() - 3600 * 1000);
                 const TokenText = generate({ length: 32, charset: 'alphanumeric' });
-                class IO extends IOManagerBase {
+                class IO implements IOManagerBase {
                     cache = [
                         {
                             token: SupportedHashMethods.sha256(TokenText),
@@ -160,7 +160,7 @@ describe('TokenManager', () => {
                 const ID = uuuidv4();
                 const ExpireDate = new Date(Date.now() + 3600 * 1000);
                 const TokenText = generate({ length: 32, charset: 'alphanumeric' });
-                class IO extends IOManagerBase {
+                class IO implements IOManagerBase {
                     cache = [
                         {
                             token: SupportedHashMethods.md5(TokenText),
@@ -198,7 +198,7 @@ describe('TokenManager', () => {
             it('create', async () => {
                 const ID = uuuidv4();
                 const ExpireDate = new Date(Date.now() + 3600 * 1000);
-                class IO extends IOManagerBase {
+                class IO implements IOManagerBase {
                     write(data: TokenGenInformation<string>): Promise<void> {
                         expect(data.token).toMatch(/^[0-9A-Za-z]{32}$/);
                         const Expect = {
@@ -225,7 +225,7 @@ describe('TokenManager', () => {
                 const ID = uuuidv4();
                 const ExpireDate = new Date(Date.now() + 3600 * 1000);
                 const TokenText = generate({ length: 32, charset: 'alphanumeric' });
-                class IO extends IOManagerBase {
+                class IO implements IOManagerBase {
                     cache = [
                         {
                             token: HashedMethod(TokenText),
@@ -257,7 +257,7 @@ describe('TokenManager', () => {
                 const ID = uuuidv4();
                 const ExpireDate = new Date(Date.now() - 3600 * 1000);
                 const TokenText = generate({ length: 32, charset: 'alphanumeric' });
-                class IO extends IOManagerBase {
+                class IO implements IOManagerBase {
                     cache = [
                         {
                             token: HashedMethod(TokenText),
@@ -284,7 +284,7 @@ describe('TokenManager', () => {
                 const ID = uuuidv4();
                 const ExpireDate = new Date(Date.now() + 3600 * 1000);
                 const TokenText = generate({ length: 32, charset: 'alphanumeric' });
-                class IO extends IOManagerBase {
+                class IO implements IOManagerBase {
                     cache = [
                         {
                             token: HashedMethod(TokenText),
@@ -323,7 +323,7 @@ describe('TokenManager', () => {
             salt: 'test_salt',
         };
         it('init/no hashed method', () => {
-            class IO extends IOManagerBase {
+            class IO implements IOManagerBase {
                 write(data: TokenGenInformation<string>): Promise<void> {
                     return Promise.resolve();
                 }
@@ -365,7 +365,7 @@ describe('TokenManager', () => {
             it('create', async () => {
                 const ID = uuuidv4();
                 const ExpireDate = new Date(Date.now() + 3600 * 1000);
-                class IO extends IOManagerBase {
+                class IO implements IOManagerBase {
                     write(data: TokenGenInformation<string>): Promise<void> {
                         expect(data.token).toMatch(/^test_salt[0-9A-Za-z]{32}$/);
                         const Expect = {
@@ -392,7 +392,7 @@ describe('TokenManager', () => {
                 const ID = uuuidv4();
                 const ExpireDate = new Date(Date.now() + 3600 * 1000);
                 const TokenText = generate({ length: 32, charset: 'alphanumeric' });
-                class IO extends IOManagerBase {
+                class IO implements IOManagerBase {
                     cache = [
                         {
                             token: SupportedHashMethods.sha256(Params.salt + TokenText),
@@ -424,7 +424,7 @@ describe('TokenManager', () => {
                 const ID = uuuidv4();
                 const ExpireDate = new Date(Date.now() - 3600 * 1000);
                 const TokenText = generate({ length: 32, charset: 'alphanumeric' });
-                class IO extends IOManagerBase {
+                class IO implements IOManagerBase {
                     cache = [
                         {
                             token: SupportedHashMethods.sha256(Params.salt + TokenText),
@@ -451,7 +451,7 @@ describe('TokenManager', () => {
                 const ID = uuuidv4();
                 const ExpireDate = new Date(Date.now() + 3600 * 1000);
                 const TokenText = generate({ length: 32, charset: 'alphanumeric' });
-                class IO extends IOManagerBase {
+                class IO implements IOManagerBase {
                     cache = [
                         {
                             token: SupportedHashMethods.md5(Params.salt + TokenText),
@@ -488,7 +488,7 @@ describe('TokenManager', () => {
             it('create', async () => {
                 const ID = uuuidv4();
                 const ExpireDate = new Date(Date.now() + 3600 * 1000);
-                class IO extends IOManagerBase {
+                class IO implements IOManagerBase {
                     write(data: TokenGenInformation<string>): Promise<void> {
                         expect(data.token).toMatch(/^[0-9A-Za-z]{32}$/);
                         const Expect = {
@@ -515,7 +515,7 @@ describe('TokenManager', () => {
                 const ID = uuuidv4();
                 const ExpireDate = new Date(Date.now() + 3600 * 1000);
                 const TokenText = generate({ length: 32, charset: 'alphanumeric' });
-                class IO extends IOManagerBase {
+                class IO implements IOManagerBase {
                     cache = [
                         {
                             token: HashedMethod(Params.salt + TokenText),
@@ -547,7 +547,7 @@ describe('TokenManager', () => {
                 const ID = uuuidv4();
                 const ExpireDate = new Date(Date.now() - 3600 * 1000);
                 const TokenText = generate({ length: 32, charset: 'alphanumeric' });
-                class IO extends IOManagerBase {
+                class IO implements IOManagerBase {
                     cache = [
                         {
                             token: HashedMethod(Params.salt + TokenText),
@@ -574,7 +574,7 @@ describe('TokenManager', () => {
                 const ID = uuuidv4();
                 const ExpireDate = new Date(Date.now() + 3600 * 1000);
                 const TokenText = generate({ length: 32, charset: 'alphanumeric' });
-                class IO extends IOManagerBase {
+                class IO implements IOManagerBase {
                     cache = [
                         {
                             token: HashedMethod(Params.salt + TokenText),
